@@ -34,7 +34,7 @@ def get_all_data(table_name):
     offset = 0
     limit = 1000  # Supabase의 기본 제한
     while True:
-        response = supabase.table(table_name).select("*").order("날짜", desc=False).limit(limit).offset(offset).execute()
+        response = supabase.table(table_name).select("*").order("날짜", desc=False).range(offset, offset + limit - 1).execute()
         data = response.data
         if not data:  # 더 이상 데이터가 없으면 종료
             break
@@ -151,8 +151,7 @@ def get_predictions_from_db(chunk_size=1000):
                 supabase.table("predicted_stocks")
                 .select("*")
                 .order("날짜", desc=False)
-                .limit(chunk_size)
-                .offset(offset)
+                .range(offset, offset + chunk_size - 1)
                 .execute()
             )
             chunk_data = response.data
