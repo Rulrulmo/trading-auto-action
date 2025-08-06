@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# TensorFlow
+*.h5
+*.pb
+
+# 출력 파일
+outputs/
+*.png
+*.csv
+
+# 환경 변수
+.env
