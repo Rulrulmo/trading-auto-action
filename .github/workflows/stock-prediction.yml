@@ -45,7 +45,7 @@ jobs:
         python src/stock_prediction.py
         
     - name: Upload prediction results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()  # 실패해도 결과 업로드
       with:
         name: prediction-results-${{ github.run_number }}
@@ -71,3 +71,13 @@ jobs:
         status: ${{ job.status }}
         channel: '#stock-alerts'
         webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    - name: Deploy to GitHub Pages
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./outputs
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        commit_message: 'Deploy stock predictions ${{ github.run_number }}'
