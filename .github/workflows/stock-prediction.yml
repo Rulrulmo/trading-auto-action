@@ -64,12 +64,12 @@ jobs:
           echo "주식 예측 모델 실행에 실패했습니다."
           # 실패 알림을 원한다면 여기에 추가
 
-      - name: Deploy to GitHub Pages
-        if: success()
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./outputs
-          user_name: "github-actions[bot]"
-          user_email: "github-actions[bot]@users.noreply.github.com"
-          commit_message: "Deploy stock predictions ${{ github.run_number }}"
+      # GitHub Pages 배포는 권한 문제로 임시 비활성화
+      # - name: Deploy to GitHub Pages
+      #   if: success()
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./outputs
+      #     force_orphan: true
+      #     commit_message: "Deploy stock predictions ${{ github.run_number }}"
